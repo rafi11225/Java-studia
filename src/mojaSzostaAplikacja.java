@@ -1,11 +1,11 @@
-package pl.pp;
+//package pl.pp;
 
 import java.util.Scanner;
 
-public class mojaPiataAplikacja {
+public class mojaSzostaAplikacja {
     public static void main(String[] args) {
-/*
-        // Obliczenia i wyświetlenie wyniku dla wartości przypisanych w kodzie aplikacji
+
+       /* // Obliczenia i wyświetlenie wyniku dla wartości przypisanych w kodzie aplikacji
         System.out.println("Obliczenia i wyświetlenie wyniku dla wartości przypisanych w kodzie aplikacji");
         boolean gameOver = true;
         int score = 800;
@@ -78,41 +78,45 @@ public class mojaPiataAplikacja {
             finalScore += (levelCompleted * bonus);
             finalScore += 1000;
         }
-        return finalScore;
-
- */
-        char symbol;
+        return finalScore;*/
+        int N;
+        System.out.println("Podaj liczbę: ");
         Scanner read = new Scanner(System.in);
-        System.out.print("Podaj symbol: ");
-        symbol = read.next().charAt(0);
-        System.out.print("Podaj liczbę znaków w rzędzie: ");
-        int LiczbaZnakow = read.nextInt();
-        System.out.print("Ile ma być rzędów: ");
-        int LiczbaRzedow = read.nextInt();
-        Wypisz(symbol, LiczbaZnakow, LiczbaRzedow);
+        N = read.nextInt();
+        int wynik1 = SI(N);
+        int wynik2 = SR(N);
+        long czas1 = System.nanoTime(SI(N));
+        long czas2 = System.nanoTime(SR(N));
+        if (czas1 > czas2) {
+            System.out.println("Metoda iteracyjna jest szybsza");
+        } else if (czas2 > czas1) {
+            System.out.println("Metoda rekurencyjna jest szybsza");
+        } else {
+            System.out.println("Obie metody są tak samo szybkie");
+        }
+        System.out.println("Metoda iteracyjna: " + wynik1);
+        System.out.println("Metoda rekurencyjna: " + wynik2);
         read.close();
 
-    }
-    private static void Wypisz(char symbol, int LiczbaZnakow, int LiczbaRzedow){
 
-        String ZawartoscRzedu = " ";
-        for(int i = 0; i < LiczbaZnakow; i++){
-            ZawartoscRzedu += (i + 1) + " ";
-        }
-        System.out.println(ZawartoscRzedu);
-        ZawartoscRzedu = " ";
-        for(int k = 0 ; k < LiczbaZnakow; k++){
-            ZawartoscRzedu += "__";
-        }
-        System.out.println(ZawartoscRzedu);
-        for(int l=0; l < LiczbaRzedow; l++){
-            ZawartoscRzedu = (l+1)+"| ";
-            for(int j= 0; j < LiczbaZnakow; j++){
-                ZawartoscRzedu +=  symbol+" ";
+        private static int SI ( int S){
+            int wynik;
+            if (S == 0) {
+                return 1;
+            } else {
+
+                do {
+                    wynik *= S;
+                    S--;
+                } while (S > 0);
             }
-            System.out.println(ZawartoscRzedu);
+
+        }
+        private static int SR ( int N){
+            if (N < 2) {
+                return 1;
+            } else {
+                return N * silnia_rekurencyjnie(N - 1);
+            }
         }
     }
-
-
-}
